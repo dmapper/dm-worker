@@ -2,12 +2,12 @@
 require('dm-sharedb-server/nconf')
 let path = require('path')
 let {backend} = require('../lib/init')
-const BUILD_FOLDER_NAME = 'build'
+const ACTIONS_PATH = path.join(process.cwd(), 'build/workerActions.js')
 
 // get worker actions from the parent project's root folder (if exists)
 let actions
 try {
-  let actionsFilePath = path.join(process.cwd(), BUILD_FOLDER_NAME, 'workerActions.js')
+  let actionsFilePath = ACTIONS_PATH
   require.resolve(actionsFilePath)
   actions = require(actionsFilePath)
 } catch (e) {
