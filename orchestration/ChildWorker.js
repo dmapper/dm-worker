@@ -4,8 +4,9 @@ const EventEmitter = require('events').EventEmitter
 const cluster = require('cluster')
 
 const TASK_TIMEOUT = 30000
+const WORKER_ENTRY_PATH = path.join(__dirname, '../worker/index.js')
 
-cluster.setupMaster({exec: path.join(__dirname, 'child.js')})
+cluster.setupMaster({exec: WORKER_ENTRY_PATH})
 
 module.exports = class ChildWorker extends EventEmitter {
 
