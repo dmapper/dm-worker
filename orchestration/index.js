@@ -10,7 +10,7 @@ if (!conf.get('REDIS_URL')) {
   throw new Error('Can not start task-manager without REDIS_URL!')
 }
 
-let {backend, redis, redis2, mongo} = require('../lib/init')
+let {backend, redis, redis2, mongo} = require('../lib/init')()
 setTimeout(() => require('../lib/mongoIndexes')(mongo), 10000)
 
 const TASK_QUERY_KEY = 'tasks:list'

@@ -1,7 +1,7 @@
 // Init env vars. This should be very first
 require('dm-sharedb-server/nconf')
 let path = require('path')
-let {backend} = require('../lib/init')
+let {backend} = require('../lib/init')()
 const ACTIONS_PATH = path.join(process.cwd(), 'build/workerActions.js')
 
 // get worker actions from the parent project's root folder (if exists)
