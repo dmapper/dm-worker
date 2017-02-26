@@ -9,7 +9,8 @@ let actions
 try {
   let actionsFilePath = ACTIONS_PATH
   require.resolve(actionsFilePath)
-  actions = require(actionsFilePath)
+  require(actionsFilePath)
+  actions = global.DM_WORKER_ACTIONS || {} // This should populate the global DM_WORKER_ACTIONS var
 } catch (e) {
   console.warn('[worker] WARNING! No actions file found. Create a workerActions.js file in ' +
     'your project\'s root with the actions which the worker can execute. This file needs ' +
