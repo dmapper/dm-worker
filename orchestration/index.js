@@ -168,7 +168,7 @@ let handleTasks = (done) => {
         // execution timeout
         { status: 'executing', executingTime: { $lt: now - EXECUTING_TIME_TIMEOUT } }
       ],
-      $orderby: { createdAt: 1 },
+      $sort: { createdAt: 1 },
       $limit: MONGO_QUERY_LIMIT
     })
 
