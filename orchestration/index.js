@@ -24,7 +24,7 @@ const THROTTLE_TIMEOUT = 3000
 const SINGLETON_TIMEOUT = 30000 // maximum
 const MONGO_QUERY_INTERVAL = 500
 const MONGO_QUERY_TIMEOUT = 2000
-const MONGO_QUERY_LIMIT = 100
+const WORKER_MONGO_QUERY_LIMIT = conf.get('WORKER_MONGO_QUERY_LIMIT') || 100
 const KILL_PROCESS_TIMEOUT = 3000
 
 let childWorkerManager = new ChildWorkerManager()
@@ -169,7 +169,7 @@ let handleTasks = (done) => {
         { status: 'executing', executingTime: { $lt: now - EXECUTING_TIME_TIMEOUT } }
       ],
       $sort: { createdAt: 1 },
-      $limit: MONGO_QUERY_LIMIT
+      $limit: WORKER_MONGO_QUERY_LIMIT
     })
 
     model.fetch(query, (err) => {
