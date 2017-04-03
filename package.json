@@ -4,7 +4,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "description": "Worker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "dependencies": {
     "async": "^2.1.5",
