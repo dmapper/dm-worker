@@ -18,10 +18,10 @@ const TASK_QUERY_KEY = 'tasks:list'
 // These timeouts should be long enough to avoid race conditions
 // We use them to recover from process crashes
 
-const WAITING_TIME_TIMEOUT = 30000
-const EXECUTING_TIME_TIMEOUT = 30000
+const WORKER_WAITING_TIME_TIMEOUT = conf.get('WORKER_WAITING_TIME_TIMEOUT') || 30000
+const WORKER_EXECUTING_TIME_TIMEOUT = conf.get('WORKER_EXECUTING_TIME_TIMEOUT') || 30000
 const THROTTLE_TIMEOUT = 3000
-const SINGLETON_TIMEOUT = 30000 // maximum
+const WORKER_SINGLETON_TIMEOUT = conf.get('WORKER_SINGLETON_TIMEOUT') || 30000 // maximum
 const MONGO_QUERY_INTERVAL = 500
 const MONGO_QUERY_TIMEOUT = 2000
 const WORKER_MONGO_QUERY_LIMIT = conf.get('WORKER_MONGO_QUERY_LIMIT') || 100
@@ -120,7 +120,7 @@ let handleTask = (model, task, lastUniqTaskIds, done) => {
 
   let singletonFn = (next) => {
     if (!(task.options && task.options.singleton)) return next()
-    passLock(`game:singletonlock:${ task.uniqId }`, SINGLETON_TIMEOUT, done, next)
+    passLock(`game:singletonlock:${ task.uniqId }`, WORKER_SINGLETON_TIMEOUT, done, next)
   }
 
   let setStatusFn = (err) => {
@@ -164,9 +164,9 @@ let handleTasks = (done) => {
         // delayed task
         { status: 'new', startTime: { $lt: now } },
         // waiting timeout
-        { status: 'waiting', waitingTime: { $lt: now - WAITING_TIME_TIMEOUT } },
+        { status: 'waiting', waitingTime: { $lt: now - WORKER_WAITING_TIME_TIMEOUT } },
         // execution timeout
-        { status: 'executing', executingTime: { $lt: now - EXECUTING_TIME_TIMEOUT } }
+        { status: 'executing', executingTime: { $lt: now - WORKER_EXECUTING_TIME_TIMEOUT } }
       ],
       $sort: { createdAt: 1 },
       $limit: WORKER_MONGO_QUERY_LIMIT
@@ -214,7 +214,7 @@ let popAndExecuteNextTask = (done) => {
     if (!taskId) return done('Wrong format of res from blpop: ' + res)
 
     let lockKey = `tasks:lockTask:${ taskId }`
-    passLock(lockKey, EXECUTING_TIME_TIMEOUT, done, () => {
+    passLock(lockKey, WORKER_EXECUTING_TIME_TIMEOUT, done, () => {
 
       let model = backend.createModel()
       let task = null
