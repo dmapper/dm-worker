@@ -2,6 +2,7 @@ const _ = require('lodash')
 const path = require('path')
 const EventEmitter = require('events').EventEmitter
 const cluster = require('cluster')
+const conf = require('nconf')
 
 const TASK_TIMEOUT = conf.get('WORKER_TASK_TIMEOUT') || 90000
 const WORKER_ENTRY_PATH = path.join(__dirname, '../worker/index.js')
