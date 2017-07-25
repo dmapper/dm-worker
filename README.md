@@ -27,6 +27,7 @@
 Since this file may be compiled by webpack, use `global.DM_WORKER_INIT` instead of `module.exports`:
 
     ```js
+    import 'dm-sharedb-server/nconf'
     import ShareDB from 'sharedb'
     import richText from 'rich-text'
     import Racer from 'racer'
