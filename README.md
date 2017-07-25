@@ -7,7 +7,13 @@
 
     ```js
     const {TaskDispatcher} import 'dm-worker'
-    const dispatcher = new TaskDispatcher
+    const dispatcher = new TaskDispatcher()
+ 
+    process.env['WORKER_ACTIONS_PATH'] = '' // full path to workerActions.js
+    process.env['WORKER_INIT_PATH'] = '' // full path to workerInit.js
+ 
+    // other workers env
+ 
     dispatcher.start().catch((err) => {
       console.log('Error starting worker', err)
     })
