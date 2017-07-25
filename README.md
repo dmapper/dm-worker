@@ -6,14 +6,18 @@
 1. In project root create `worker.js`:
 
     ```js
-    const {TaskDispatcher} import 'dm-worker'
+    const conf = require('nconf')
+    require('dm-sharedb-server/nconf')
+    
+    const path = require('path')
+    
+    // full path to workerActions.js and workerInit.js
+    process.env['WORKER_ACTIONS_PATH'] = path.join(process.cwd(), './build/workerActions.js')
+    process.env['WORKER_INIT_PATH'] = path.join(process.cwd(), './build/workerInit.js')
+    
+    const TaskDispatcher = require('dm-worker')
     const dispatcher = new TaskDispatcher()
- 
-    process.env['WORKER_ACTIONS_PATH'] = '' // full path to workerActions.js
-    process.env['WORKER_INIT_PATH'] = '' // full path to workerInit.js
- 
-    // other workers env
- 
+    
     dispatcher.start().catch((err) => {
       console.log('Error starting worker', err)
     })
