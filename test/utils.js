@@ -46,7 +46,7 @@ class DispatcherRunner {
     const task = {
       id,
       createdAt: now,
-      type: 'test',
+      type: options._type || 'test',
       status: 'new',
       uniqId,
       options

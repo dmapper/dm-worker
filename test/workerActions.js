@@ -8,3 +8,11 @@ ACTIONS.test = function (model, task, done) {
     done()
   }, duration)
 }
+
+ACTIONS.testAsync = async (model, task) => {
+  const options = task.options || {}
+  const duration = options.duration || 50
+  await new Promise((resolve) => {
+    setTimeout(resolve, duration)
+  })
+}

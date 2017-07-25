@@ -3,8 +3,6 @@ const _ = require('lodash')
 const path = require('path')
 const {DispatcherRunner} = require('./utils')
 
-
-
 describe('tasks', function() {
   const runner = new DispatcherRunner()
   this.timeout(40000)
