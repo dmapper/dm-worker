@@ -1,18 +1,33 @@
 {
   "name": "dm-worker",
+  "version": "2.0.0",
+  "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "description": "Worker",
-  "version": "1.0.4",
-  "main": "index.js",
+  "main": "indes.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha -w test/*.mocha.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "async": "^2.1.5",
+    "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
-    "redis-url": "^1.2.1"
+    "redlock": "^3.0.0"
   },
   "peerDependencies": {
-    "dm-sharedb-server": ">=3.0.0",
-    "nconf": "*"
+    "sharedb-mongo": "*",
+    "sharedb-redis-pubsub": "*",
+    "redis-url": "*",
+    "racer": "*"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "racer": "^0.9.2",
+    "redis-url": "^1.2.1",
+    "sharedb-mongo": "^1.0.0-beta.4",
+    "sharedb-redis-pubsub": "^1.0.0-beta.1"
   }
 }

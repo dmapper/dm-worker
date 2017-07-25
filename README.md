@@ -6,7 +6,11 @@
 1. In project root create `worker.js`:
 
     ```js
-    import 'dm-worker'
+    const {TaskDispatcher} import 'dm-worker'
+    const dispatcher = new TaskDispatcher
+    dispatcher.start().catch((err) => {
+      console.log('Error starting worker', err)
+    })
     ```
 
 2. In project root create `workerInit.js`. Do any initializations here (plug in hooks, ORM, etc.).
@@ -66,4 +70,4 @@ Since this file may be compiled by webpack, use `global.DM_WORKER_ACTIONS` inste
 
 ## MIT Licence
 
-Copyright (c) 2016 Decision Mapper
+Copyright (c) 2017 Decision Mapper
