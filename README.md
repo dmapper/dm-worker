@@ -8,16 +8,16 @@
     ```js
     const conf = require('nconf')
     require('dm-sharedb-server/nconf')
-    
+
     const path = require('path')
-    
+
     // full path to workerActions.js and workerInit.js
     process.env['WORKER_ACTIONS_PATH'] = path.join(process.cwd(), './build/workerActions.js')
     process.env['WORKER_INIT_PATH'] = path.join(process.cwd(), './build/workerInit.js')
-    
+
     const TaskDispatcher = require('dm-worker')
     const dispatcher = new TaskDispatcher()
-    
+
     dispatcher.start().catch((err) => {
       console.log('Error starting worker', err)
     })
@@ -33,6 +33,7 @@ Since this file may be compiled by webpack, use `global.DM_WORKER_INIT` instead 
     import Racer from 'racer'
     import derbyAr from 'derby-ar'
     import ormEntities from './model'
+    import shareDbHooks from 'sharedb-hooks'
     import hooks from './server/hooks'
 
     let init = global.DM_WORKER_INIT = function (backend) {
@@ -42,9 +43,10 @@ Since this file may be compiled by webpack, use `global.DM_WORKER_INIT` instead 
       // Init ORM
       Racer.use(derbyAr)
       Racer.use(ormEntities)
+      shareDbHooks(backend)
+      hooks(backend)
     }
 
-    init.hooks = hooks
     ```
 
 3. In project root create `workerActions.js`. Put your tasks here (name of functions are the name of tasks).
@@ -67,14 +69,14 @@ Since this file may be compiled by webpack, use `global.DM_WORKER_ACTIONS` inste
     ```js
     module.exports = {   
       // ...
-   
+
       backendApps: {
         server: path.join(__dirname, 'server'),
         worker: path.join(__dirname, 'worker'),
         workerActions: path.join(__dirname, 'workerActions'),
         workerInit: path.join(__dirname, 'workerInit')     
       }
-   
+
       // ...   
     }
     ```
