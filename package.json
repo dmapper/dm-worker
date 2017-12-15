@@ -5,7 +5,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "indes.js",
+  "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha -w test/*.mocha.js"
   },
