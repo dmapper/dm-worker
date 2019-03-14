@@ -1,5 +1,3 @@
-const cluster = require('cluster')
-const path = require('path')
 const isPlainObject = require('lodash/isPlainObject')
 const {delay} = require('../lib/utils')
 
