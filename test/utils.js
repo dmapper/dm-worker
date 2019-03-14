@@ -1,6 +1,6 @@
 const cluster = require('cluster')
 const path = require('path')
-const _ = require('lodash')
+const isPlainObject = require('lodash/isPlainObject')
 const {delay} = require('../lib/utils')
 
 const TaskDispatcher = require('../lib/TaskDispatcher')
@@ -35,7 +35,7 @@ class DispatcherRunner {
 
   async createTask(uniqId, options) {
 
-    if (_.isPlainObject(uniqId)) {
+    if (isPlainObject(uniqId)) {
       options = uniqId
       uniqId = this.model.id()
     }

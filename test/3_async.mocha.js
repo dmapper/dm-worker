@@ -1,5 +1,4 @@
 const assert = require('assert')
-const _ = require('lodash')
 const path = require('path')
 const {DispatcherRunner} = require('./utils')
 

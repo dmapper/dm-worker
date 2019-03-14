@@ -1,5 +1,6 @@
 const assert = require('assert')
-const _ = require('lodash')
+const sortBy = require('lodash/sortBy')
+const clone = require('lodash/clone')
 const path = require('path')
 const {DispatcherRunner} = require('./utils')
 
@@ -122,7 +123,7 @@ describe('tasks', function() {
         singleton: true
       })
       assert.equal(result.done, 5)
-      assert.deepEqual(result.timestamps, _.sortBy(_.clone(result.timestamps)))
+      assert.deepEqual(result.timestamps, sortBy(clone(result.timestamps)))
     })
 
     it('ten', async function() {
@@ -133,7 +134,7 @@ describe('tasks', function() {
       })
       //console.log('result', result)
       assert.equal(result.done, 10)
-      assert.deepEqual(result.timestamps, _.sortBy(_.clone(result.timestamps)))
+      assert.deepEqual(result.timestamps, sortBy(clone(result.timestamps)))
     })
   })
 })
