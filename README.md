@@ -82,4 +82,4 @@ Since this file may be compiled by webpack, use `global.DM_WORKER_ACTIONS` inste
 
 ## MIT Licence
 
-Copyright (c) 2017 Decision Mapper
+Copyright (c) 2019 Decision Mapper
