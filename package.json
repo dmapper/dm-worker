@@ -15,7 +15,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "lodash": "^4.17.11",
-    "mongodb": "^2.2.33",
+    "mongodb": "^3.6.1",
     "redlock": "^3.0.0"
   },
   "peerDependencies": {
