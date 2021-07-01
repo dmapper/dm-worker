@@ -1,6 +1,6 @@
 {
   "name": "dm-worker",
-  "version": "4.6.3",
+  "version": "4.6.4",
   "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -15,14 +15,14 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "lodash": "^4.17.11",
-    "mongodb": "^2.2.33",
     "redlock": "^3.0.0"
   },
   "peerDependencies": {
     "sharedb-mongo": "*",
     "sharedb-redis-pubsub": "*",
     "ioredis": "*",
-    "racer": "*"
+    "racer": "*",
+    "mongodb": "*"
   },
   "devDependencies": {
     "ioredis": "^4.8.0",
