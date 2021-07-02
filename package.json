@@ -1,6 +1,6 @@
 {
   "name": "dm-worker",
-  "version": "4.6.4",
+  "version": "4.6.5",
   "description": "",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
